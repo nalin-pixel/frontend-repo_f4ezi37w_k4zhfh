@@ -1,7 +1,9 @@
 import { useMemo } from 'react'
 import Hero from './components/Hero'
-import Section from './components/Section'
+import ParallaxSection from './components/ParallaxSection'
 import InfoCard from './components/InfoCard'
+import Navbar from './components/Navbar'
+import ProjectGallery from './components/ProjectGallery'
 
 function App() {
   const contact = useMemo(() => ({
@@ -67,10 +69,11 @@ function App() {
   ]), [])
 
   return (
-    <div className="min-h-screen antialiased text-slate-900">
+    <div className="min-h-screen antialiased text-slate-900 bg-gradient-to-b from-white to-indigo-50/30">
+      <Navbar />
       <Hero />
 
-      <Section id="about" title="Summary" subtitle="A quick snapshot of my focus and strengths.">
+      <ParallaxSection id="about" title="Summary" subtitle="A quick snapshot of my focus and strengths.">
         <div className="grid md:grid-cols-3 gap-6">
           <InfoCard
             title="About Me"
@@ -83,12 +86,16 @@ function App() {
           <InfoCard title="Top Skills" items={skills} />
           <InfoCard title="Certifications" items={certifications} />
         </div>
-      </Section>
+      </ParallaxSection>
 
-      <Section id="experience" title="Experience" subtitle="Real-world work across companies and freelance.">
+      <ParallaxSection id="projects" title="Projects" subtitle="A few highlights from recent work.">
+        <ProjectGallery />
+      </ParallaxSection>
+
+      <ParallaxSection id="experience" title="Experience" subtitle="Real-world work across companies and freelance.">
         <div className="space-y-6">
           {experiences.map((exp, idx) => (
-            <div key={idx} className="rounded-2xl bg-white/80 backdrop-blur border border-slate-200/60 shadow-sm p-6">
+            <div key={idx} className="rounded-2xl bg-white/80 backdrop-blur border border-slate-200/60 shadow-sm p-6 transition-transform hover:-translate-y-1">
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h3 className="text-xl font-semibold">{exp.role} · <span className="text-indigo-700">{exp.org}</span></h3>
                 <span className="text-sm text-slate-600">{exp.period}</span>
@@ -101,15 +108,15 @@ function App() {
             </div>
           ))}
         </div>
-      </Section>
+      </ParallaxSection>
 
-      <Section id="education" title="Education">
+      <ParallaxSection id="education" title="Education">
         <div className="grid md:grid-cols-2 gap-6">
           <InfoCard title="Education" items={education} />
         </div>
-      </Section>
+      </ParallaxSection>
 
-      <Section id="contact" title="Contact">
+      <ParallaxSection id="contact" title="Contact">
         <div className="grid md:grid-cols-2 gap-6">
           <InfoCard
             title="Reach Me"
@@ -133,7 +140,7 @@ function App() {
             </form>
           </div>
         </div>
-      </Section>
+      </ParallaxSection>
 
       <footer className="py-10">
         <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-14 text-sm text-slate-600 flex flex-wrap items-center justify-between gap-3">
